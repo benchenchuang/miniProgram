@@ -17,14 +17,6 @@ Page({
       showSign:true,
       noPeople: false
     });
-    if (this.data.otherId){//刚才授权前为跳转的
-      wx.navigateTo({
-        url: `/pages/contacts/other-card/index?id=${this.data.otherId}`,
-      })
-      this.setData({
-        otherId: null
-      });
-    }
   },
   //事件处理函数
   bindViewTap: function() {
