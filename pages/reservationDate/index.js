@@ -19,13 +19,12 @@ Page({
   selectDate(e){
     let selectTime = e.currentTarget.dataset.time;
     let selectDate = e.currentTarget.dataset.date;
-    if (selectTime < this.data.todayTime || selectTime >= this.data.endDateTime){
+    if (selectTime < this.data.todayTime){
       return false;
     }
     this.setData({
       isDate: selectDate
     })
-    console.log(selectDate)
   },
   onLoad: function () {
     let now = new Date();

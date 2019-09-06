@@ -40,12 +40,27 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 2,
 			"list": [
 				{
+					"id": 0,
+					"name": "选择预约日期",
+					"pathName": "pages/reservationDate/index",
+					"query": "",
+					"scene": null
+				},
+				{
 					"id": -1,
-					"name": "日历",
-					"pathName": "pages/cadalender/index",
+					"name": "我的预约",
+					"pathName": "pages/myReservation/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "预约参观时间",
+					"pathName": "pages/reservationTime/index",
+					"query": "",
 					"scene": null
 				}
 			]

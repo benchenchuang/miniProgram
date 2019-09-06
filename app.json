@@ -2,12 +2,14 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/cadalender/index"
+    "pages/myReservation/index",
+    "pages/reservationDate/index",
+    "pages/reservationTime/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "昆明恒隆-teamLab未来游乐园",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json"

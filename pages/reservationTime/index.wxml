@@ -1,0 +1,34 @@
+<!--pages/reservationTime/index.wxml-->
+<view class="time_box header_line">
+  <view class="header">图例</view>
+  <view class="example">
+    <view class="exp_item flex fluent">畅通</view>
+    <view class="exp_item flex same">一般</view>
+    <view class="exp_item flex crowd">拥挤</view>
+    <view class="exp_item flex flex_full">已满，不可选</view>
+  </view>
+</view>
+
+<view class="time_wrap">
+  <view class="header">请选择时间段</view>
+  <view class="times">
+    <view class="time">
+      <view class="exp_item fluent">11:00-12:00</view>
+    </view>
+    <view class="time">
+      <view class="exp_item fluent">11:00-12:00</view>
+    </view>
+    <view class="time">
+      <view class="exp_item fluent">11:00-12:00</view>
+    </view>
+    <view class="time">
+      <view class="exp_item fluent gray">11:00-12:00</view>
+    </view>
+    <view class="time">
+      <view class="exp_item fluent">11:00-12:00</view>
+    </view>
+    <view class="time">
+      <view class="exp_item fluent">11:00-12:00</view>
+    </view>
+  </view>
+</view>

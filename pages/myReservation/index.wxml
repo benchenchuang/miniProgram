@@ -1,0 +1,41 @@
+<!--pages/myReservation/index.wxml-->
+<view class="reservation">
+  <view class="reservation_wrap">
+    <view class="reservation_status">
+      <image class="status_icon" src="../../images/icon-success.png" mode="widthFix"></image>
+      <view class="status_txt">预约成功！</view>
+    </view>
+    <view class="reservation_header">
+      <text class="title">teamLab未来游乐园展览</text>
+      <text class="status_success">预约成功</text>
+      <!-- <text class="status_cancel">已取消</text> -->
+    </view>
+    <view class="reservation_box">
+      <view class="item">
+        <text class="label">预约时间</text>
+        <text class="content">2019-10-17/13:00-14:00</text>
+      </view>
+      <view class="item">
+        <text class="label">预约人数</text>
+        <text class="content">6人</text>
+      </view>
+      <view class="item">
+        <text class="label">换票须知</text>
+        <text class="content">网络购票，请凭取票码先至展厅网络兑票处换取纸质门票后，入场参观。</text>
+      </view>
+      <view class="item">
+        <text class="label">参观提示</text>
+        <text class="content">请提前20分钟至现场办理参观流程，如遇观展高峰请听从工作人员安排，有序入场。</text>
+      </view>
+    </view>
+  </view>
+  <view class="tip_content">
+    <view class="tip">1.一个id只能同时预约一次，单次预约上限6人，团队预约请致电***。</view>
+    <view class="tip">2.如需更改预约日期，需取消预约后再进行预约。</view>
+    <view class="tip">3.如错过预约时间需重新预约。</view>
+    <view class="tip">您已成功取消2019-10-17/13:00-14:00时段预约。如需再次预约，点击下方选项。</view>
+  </view>
+  <text class="common_btn primary_btn" bindtap="cancelReservation">取消预约</text>
+  <text class="common_btn active_btn static_btn" bindtap="cancelReservation">获得更多优惠</text>
+  <navigator url="../reservationDate/index" hover-class="none" class="common_btn active_btn">重新预约</navigator>
+</view>

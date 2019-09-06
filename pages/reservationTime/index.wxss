@@ -1,0 +1,72 @@
+/* pages/reservationTime/index.wxss */
+.time_box{
+  padding-bottom: 50rpx;
+  border-bottom: 20rpx solid #F2F4FC;
+  color: #302E40;
+  font-size: 28rpx;
+}
+.header{
+  padding: 40rpx 60rpx;
+  font-size: 28rpx;
+  color: #302E40;
+}
+.example{
+  padding: 0 60rpx;
+  display: flex;
+  display: -webkit-flex;
+}
+.exp_item{
+  position: relative;
+  margin-left: 40rpx;
+}
+.flex{
+  flex: 1;
+  -webkit-flex:1;
+}
+.exp_item.flex_full{
+  flex: 1.5;
+  -webkit-flex:1.5;
+}
+.exp_item::before{
+  content: "";
+  position: absolute;
+  top: 8rpx;
+  left: -32rpx;
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 100%;
+  background: #4A4A4A;
+}
+.fluent::before{
+  background: #50E3C2
+}
+.same::before{
+  background: #F8E71C
+}
+.same::before{
+  background: #F8E71C
+}
+.crowd::before{
+  background: #FF5977
+}
+.times{
+  margin-top: -20rpx;
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap:wrap;
+  font-size: 34rpx;
+  color: #302E40;
+}
+.times .time{
+  width: 50%;
+  padding: 30rpx 0;
+  padding-left: 60rpx;
+  box-sizing: border-box;
+  border-bottom: 1px solid #e8e8e8;
+}
+.time .exp_item::before{
+  top: 10rpx;
+}
+.time .gray{
+  color: #B8B8BC
+}

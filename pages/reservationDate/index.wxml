@@ -1,0 +1,31 @@
+<view class='wrap header_line'>
+	<view>
+		<view class='date-show'>
+			<!-- <view class='lt-arrow gray' wx:if="{{thisMonth<=startMonth}}">
+        <image src='../../images/left.png' mode='widthFix'></image>
+			</view> -->
+			<view class='lt-arrow' bindtap='lastMonth'>
+        <image src='../../images/left.png' mode='widthFix'></image>
+			</view>
+			{{year}}年{{month}}月
+			<!-- <view class='rt-arrow gray' wx:if="{{thisMonth>=endMonth}}">
+        <image src='../../images/right.png' mode='widthFix'></image>
+			</view> -->
+			<view class='rt-arrow' bindtap='nextMonth'>
+        <image src='../../images/right.png' mode='widthFix'></image>
+			</view>
+		</view>
+	</view>
+	<view class='header'>
+		<view wx:for='{{date}}' wx:key="index">{{item}}<view></view></view>
+	</view>
+	<view class='date_box'>
+		<view wx:for='{{dateArr}}' wx:key="index" class="date_item" class='{{isDate == item.isDate ? "nowDay":(todayTime > item.dateTime?"gray":"")}}' data-date='{{item.isDate}}' data-time = '{{item.dateTime}}' bindtap="selectDate">	
+			<view class='date'>
+				<view>{{item.dateNum}}</view>
+			</view>
+		</view>
+	</view>
+  <view class="tip">早鸟票只可预约11.18号之前参观 平日票只可预约工作日参观 全通票任意时间段都可以预约</view>
+  <navigator url="../reservationTime/index" hover-class="none" class="common_btn active_btn">下一步</navigator>
+</view>

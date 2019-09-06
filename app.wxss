@@ -1,10 +1,25 @@
 /**app.wxss**/
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-} 
+.header_line{
+  border-top: 1px solid #e8e8e8;
+}
+.common_btn{
+  display: block;
+  flex:1;
+  -webkit-flex:1;
+  margin: 16rpx;
+  text-align: center;
+  height: 116rpx;
+  line-height: 116rpx;
+  font-size: 34rpx;
+  font-weight: 700;
+  border-radius: 116rpx;
+  border: 2px solid #3165ec;
+}
+.active_btn{
+  color: #fff;
+  background: #3165ec;
+}
+.primary_btn{
+  color: #3165ec;
+  background: #fff;
+}
