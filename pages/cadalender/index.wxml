@@ -1,13 +1,18 @@
 <view class='wrap'>
 	<view>
 		<view class='date-show'>
-			<view class='lt-arrow' bindtap='lastMonth'>
+			<view class='lt-arrow gray' wx:if="{{thisMonth<=startMonth}}">
       last<image src='../images/nextMonth.png' mode='aspectFit'></image>
 			</view>
-			{{year}}年{{month}}月
-			<view class='rt-arrow' bindtap='nextMonth'>
-      next
-				<image src='../images/nextMonth.png' mode='aspectFit'></image>
+			<view class='lt-arrow' bindtap='lastMonth' wx:else>
+      last<image src='../images/nextMonth.png' mode='aspectFit'></image>
+			</view>
+			{{year}}年{{month}}月 {{}}
+			<view class='rt-arrow gray' wx:if="{{thisMonth>=endMonth}}">
+       next<image src='../images/nextMonth.png' mode='aspectFit'></image>
+			</view>
+			<view class='rt-arrow' bindtap='nextMonth' wx:else>
+        next <image src='../images/nextMonth.png' mode='aspectFit'></image>
 			</view>
 		</view>
 	</view>
@@ -16,7 +21,7 @@
 		<!-- <view wx:for='{{date}}' class='{{(index == todayIndex) && isTodayWeek ? "weekMark" : ""}}'>{{item}}<view></view></view> -->
 	</view>
 	<view class='date_box'>
-		<view wx:for='{{dateArr}}' wx:key="index" class="date_item" class='{{isToday == item.isToday ? "nowDay":(todayNum > item.dateTimeNum?"gray":"")}}' data-date='{{item.isToday}}' bindtap="selectDate">	
+		<view wx:for='{{dateArr}}' wx:key="index" class="date_item" class='{{isDate == item.isDate ? "nowDay":(todayTime > item.dateTime || item.dateTime>=endDateTime?"gray":"")}}' data-date='{{item.isDate}}' data-time = '{{item.dateTime}}' bindtap="selectDate">	
 			<view class='date'>
 				<view>{{item.dateNum}}</view>
 			</view>

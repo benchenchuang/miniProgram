@@ -5,18 +5,27 @@ Page({
   data: {
     year: 0,
     month: 0,
+    thisMonth:0,
+    startMonth:0,
+    endMonth: new Date('2019-11').getTime(),
     date: ['日', '一', '二', '三', '四', '五', '六'],
     dateArr: [],
     isToday: 0,
     isTodayWeek: false,
     todayIndex: 0,
-    todayNum:0
+    todayTime:0,
+    endDateTime:new Date('2019-11-18').getTime()
   },
   selectDate(e){
-    let selectIndex = e.currentTarget.dataset.date;
+    let selectTime = e.currentTarget.dataset.time;
+    let selectDate = e.currentTarget.dataset.date;
+    if (selectTime < this.data.todayTime || selectTime >= this.data.endDateTime){
+      return false;
+    }
     this.setData({
-      isToday:selectIndex
+      isDate: selectDate
     })
+    console.log(selectDate)
   },
   onLoad: function () {
     let now = new Date();
@@ -26,10 +35,10 @@ Page({
     this.setData({
       year: year,
       month: month,
-      isToday: '' + year + month + now.getDate(),
-      todayNum: new Date(year + '-' + month + '-' + now.getDate()).getTime()
+      startMonth: new Date(''+year + '-' + month).getTime(),
+      isDate: year + '年' + month + '月' + now.getDate() + '日',
+      todayTime: new Date(year + '-' + month + '-' + now.getDate()).getTime()
     })
-    console.log(this.data.todayNum)
   },
   dateInit: function (setYear, setMonth) {
     //全部时间的月份都是按0~11基准，显示月份才+1
@@ -44,7 +53,6 @@ Page({
     let dayNums = new Date(year, nextMonth, 0).getDate();				//获取目标月有多少天
     let obj = {};
     let num = 0;
-
     if (month + 1 > 11) {
       nextYear = year + 1;
       dayNums = new Date(nextYear, nextMonth, 0).getDate();
@@ -54,10 +62,9 @@ Page({
       if (i >= startWeek) {
         num = i - startWeek + 1;
         obj = {
-          isToday: '' + year + (month + 1) + num,
+          isDate: year+'年' + (month + 1)+'月'+ num+'日',
           dateNum: num,
-          dateTimeNum: new Date(year + '-' + (month + 1) + '-'+ num).getTime(),
-          weight: 5
+          dateTime: new Date(year + '-' + (month + 1) + '-'+ num).getTime()
         }
       } else {
         obj = {};
@@ -93,7 +100,8 @@ Page({
     let month = this.data.month - 2 < 0 ? 11 : this.data.month - 2;
     this.setData({
       year: year,
-      month: (month + 1)
+      month: (month + 1),
+      thisMonth:new Date(year+'-'+(month+1)).getTime()
     })
     this.dateInit(year, month);
   },
@@ -103,7 +111,8 @@ Page({
     let month = this.data.month > 11 ? 0 : this.data.month;
     this.setData({
       year: year,
-      month: (month + 1)
+      month: (month + 1),
+      thisMonth: new Date(''+year + '-' + (month + 1)).getTime()
     })
     this.dateInit(year, month);
   }
