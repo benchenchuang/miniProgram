@@ -14,7 +14,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.8.2",
-	"appid": "wxa6a007af5a246f76",
+	"appid": "touristappid",
 	"projectname": "miniprogram",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -31,13 +31,24 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "日历",
+					"pathName": "pages/cadalender/index",
+					"scene": null
+				}
+			]
 		}
 	}
 }

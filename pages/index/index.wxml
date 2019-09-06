@@ -11,5 +11,6 @@
     <text class="user-motto">{{motto}}</text>
   </view>
 </view>
-<!-- 授权 -->
+<!-- 授权
 <is-authorize bind:sendUserInfo="getAuthorize" wx:if="{{isToAuthorize}}" is-tab="{{true}}"></is-authorize>
+ -->
