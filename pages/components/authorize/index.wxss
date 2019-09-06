@@ -1,0 +1,39 @@
+/* pages_card/component/authorize/index.wxss */
+.authorize_wrap{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.8);
+  z-index: 9999;
+}
+.authorize{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  text-align: center;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  width: 600rpx;
+}
+.authorize .tip{
+  margin: 20rpx 0 40rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+.authorize button,
+.button-hover{
+  width: 400rpx;
+  background: #f7be64;
+}
+.statement{
+  position: absolute;
+  left: 80rpx;
+  right: 80rpx;
+  bottom: 80rpx;
+  text-align: center;
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  color: #999;
+}

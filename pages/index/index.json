@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "is-authorize": "../components/authorize/index"
+  }
+}
