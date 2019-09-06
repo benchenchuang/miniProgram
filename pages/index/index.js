@@ -7,7 +7,24 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    isToAuthorize:true
+  },
+  getAuthorize(info) {
+    this.getFirstCircle();
+    this.setData({
+      userInfo: info.detail,
+      showSign:true,
+      noPeople: false
+    });
+    if (this.data.otherId){//刚才授权前为跳转的
+      wx.navigateTo({
+        url: `/pages/contacts/other-card/index?id=${this.data.otherId}`,
+      })
+      this.setData({
+        otherId: null
+      });
+    }
   },
   //事件处理函数
   bindViewTap: function() {

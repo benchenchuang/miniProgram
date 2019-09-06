@@ -1,0 +1,8 @@
+<!--pages_card/component/authorize/index.wxml-->
+<view class='authorize_wrap' wx:if="{{!isAuthorize}}" catchtouchmove='noScroll' catchtouchend='noScroll'>
+  <view class='authorize'>
+    <view class='tip'>点击授权后，系统自动创建名片</view>
+    <button open-type="getUserInfo" hover-class="btn-hover" bindgetuserinfo="openAuthorize" class='authorize_btn' type='primary'>授权登录</button>
+  </view>
+    <view class='statement'>免责声明：觅场发布的任何内容仅代表发布者个人观点,与觅场无关。</view>
+</view>
