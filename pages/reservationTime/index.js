@@ -34,19 +34,21 @@ Page({
     }
     let nowDate = new Date();
     let dateFormal = nowDate.getFullYear() + '-' + this.getDoubleNum(nowDate.getMonth() + 1) + '-' + this.getDoubleNum(nowDate.getDate())
-    let thisDate = new Date(dateFormal)
-    let selectDate = new Date(date)
+    let thisDate = new Date(dateFormal).getTime()
+    let selectDate = new Date(date).getTime()
     let reduceTime = selectDate - thisDate;
+   
     commonApi.getReservationTimes(params).then(res => {
       if(res.code==200){
         let getDurations = [];
-        if(reduceTime){
+        if(reduceTime>0){
           getDurations = res.data.records;
         }else{
           let nowTime = nowDate.getTime();
           let getRecords = res.data.records;
           getRecords.map(item=>{
-            let endTime = new Date(dateFormal+' '+item.duration.split('-')[1]+':00').getTime();
+            let timeRange = item.duration.split('-')[1].split(':');
+            let endTime = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), Number(timeRange[0]), Number(timeRange[1]), 0).getTime();
             if(endTime-nowTime < 5*60*1000){
               item.status = '3'
             }
