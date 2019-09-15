@@ -1,0 +1,22 @@
+<!--pages/reservationNumber/index.wxml-->
+<view class="container">
+  <image class="container_bg" src="../../images/bg.jpg" mode="aspectFill"></image>
+  <view class="modal">
+    <view class="header">预约参观人数</view>
+    <view class="box">
+      <view class="set">
+        <text class="name">人数</text>
+        <view class="num_box">
+          <image class="num_btn {{peopleNum<=1?'gray':''}}" bindtap="reduceHandle" src="../../images/icon-reduce.png" mode="widthFix"></image>
+          <input class="num_put" value="{{peopleNum}}" disabled/>
+          <image class="num_btn {{peopleNum>=maxNum?'gray':''}}" bindtap="addHandle" src="../../images/icon-add.png" mode="widthFix"></image>
+        </view>
+      </view>
+      <view class="tip_content">
+        <view class="tip">预约上限{{maxNum}}人，如需团体预约可致电</view>
+        <view class="tip" bindtap="callReservation">{{telPhone}}</view>
+      </view>
+      <text class="common_btn active_btn" bindtap="clickReservation">点击预约</text>
+    </view>
+  </view>
+</view>

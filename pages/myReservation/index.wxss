@@ -26,7 +26,7 @@ page{
   height: 128rpx;
   line-height: 128rpx;
   font-size: 34rpx;
-  font-weight: 700;
+  /* font-weight: 700; */
   border-bottom: 1px solid #e8e8e8;
 }
 .reservation_header .title{
@@ -44,7 +44,7 @@ page{
   display: -webkit-flex;
   padding: 30rpx 0;
   font-size: 28rpx;
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 .reservation .label{
   width: 180rpx;

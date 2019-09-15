@@ -27,15 +27,55 @@
   height: 116rpx;
   line-height: 116rpx;
   font-size: 34rpx;
-  font-weight: 700;
+  /* font-weight: 700; */
   border-radius: 116rpx;
   border: 2px solid #3165ec;
 }
-/* .btn.reservation{
-  color: #fff;
-  background: #3165ec;
+.mask{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
 }
-.btn.mine_reservation{
-  color: #3165ec;
+.mask_modal{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 560rpx;
   background: #fff;
-} */
+  border-radius: 20rpx;
+}
+.mask_content{
+  padding: 56rpx 40rpx;
+  font-size: 30rpx;
+  color: #484858;
+  text-align: center;
+}
+.mask_modal .mask_btn{
+  display: block;
+  width: 100%;
+  border-top: 1px solid #e8e8e8;
+  height: 96rpx;
+  line-height: 96rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #484858;
+}
+.mask_btn.active_link{
+  color: #6490FE;
+}
+.mask_desc{
+  padding: 0 50rpx;
+  border-top: 1px solid #e8e8e8;
+  font-size: 26rpx;
+  color: #484858;
+}
+.tel{
+  display: inline-block;
+}
+.mask_desc .desc{
+  margin: 30rpx 0;
+}

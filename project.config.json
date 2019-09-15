@@ -4,18 +4,27 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
+		"enhance": true,
 		"postcss": true,
-		"minified": true,
+		"minified": false,
 		"newFeature": true,
+		"coverView": true,
 		"autoAudits": false,
-		"coverView": true
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
-	"compileType": "miniprogram",
+	"compileType": "昆明恒隆-teamLab未来游乐园",
 	"libVersion": "2.8.2",
-	"appid": "touristappid",
-	"projectname": "miniprogram",
+	"appid": "wx178007c276ba0fe6",
+	"projectname": "昆明恒隆-teamLab未来游乐园",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -40,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 4,
 			"list": [
 				{
 					"id": 0,
@@ -60,6 +69,20 @@
 					"id": -1,
 					"name": "预约参观时间",
 					"pathName": "pages/reservationTime/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "预约参观人数",
+					"pathName": "pages/reservationNumber/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "购票",
+					"pathName": "pages/buyTickets/index",
 					"query": "",
 					"scene": null
 				}

@@ -1,22 +1,85 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+const indexApi = require('../../api/index.js')
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    isToAuthorize:true
+    isToAuthorize:true,
+    buyMask:false,
+    reserveMask:false,
+    telPhone:app.globalData.telPhone,
+    isReservation:false,
+    isOnce:false
+  },
+  goBuyTickets(){
+    wx.navigateToMiniProgram({
+      appId: '',
+      path: 'page/index/index?id=123',
+      envVersion: 'develop',
+      success(res) {
+        // 打开成功
+      }
+    })
   },
   getAuthorize(info) {
-    this.getFirstCircle();
     this.setData({
       userInfo: info.detail,
-      showSign:true,
-      noPeople: false
+      showSign:true
     });
+    this.getReservation();
+  },
+  callPhone(){
+    wx.makePhoneCall({
+      phoneNumber: this.data.telPhone
+    })
+  },
+  //点击预约
+  reservationHandle(){
+    if(this.data.isReservation){//已经有预约信息
+      wx.navigateTo({
+        url: '../myReservation/index',
+      })
+    }else if(this.data.isOnce) {
+      wx.navigateTo({
+        url: '../reservationDate/index',
+      })
+    }else{
+      this.setData({
+        buyMask: true
+      });
+    }
+  },
+  //我的预约
+  goMyReservation(){
+    if (this.data.isReservation) {//已经有预约信息
+      wx.navigateTo({
+        url: '../myReservation/index',
+      })
+    }else if(this.data.isOnce){
+      wx.navigateTo({
+        url: '../reservationDate/index',
+      })
+    } else {
+      this.setData({
+        buyMask: true
+      });
+    }
+  },
+  stopDrag(){
+    return false;
+  },
+  //确定购买
+  sureBuyHandle(){
+    this.setData({
+      buyMask: false,
+      reserveMask:true
+    });
+  },
+  //取消提示
+  cancelBuyMadal(){
+    this.setData({
+      buyMask:false
+    })
   },
   //事件处理函数
   bindViewTap: function() {
@@ -24,40 +87,49 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
+  getReservation() {
+    indexApi.getUserReservation().then(res => {
+      if(res.code==200){
+        if(res.data && res.data.num){
           this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
+            isReservation: true
+          })
+        }else{
+          this.setData({
+            isReservation: false
+          })
+          if (res.data && res.data.day) {
+            this.setData({
+              isOnce: true
+            })
+          }
+        }
+      }else{
+        this.setData({
+          isReservation: false
+        })
+        if (res.data && res.data.day){
+          this.setData({
+            isOnce:true
           })
         }
-      })
+      }
+    })
+  },
+  onLoad: function () {
+    wx.showShareMenu();
+  },
+  onShow(){
+    let token = wx.getStorageSync('token') || ''
+    if (token){
+      this.getReservation()
     }
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+  onHide: function () {
     this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      buyMask: false,
+      reserveMask: false
     })
-  }
+  },
+  
 })

@@ -20,7 +20,7 @@ Component({
   },
   ready() {
     let that = this;
-    let userId = wx.getStorageSync('sessionId')
+    let userId = wx.getStorageSync('token')
     wx.getSetting({
       success(res) {
         console.log(res)
@@ -29,11 +29,6 @@ Component({
             isAuthorize: true
           })
         }else{
-          wx.hideTabBar({
-            animation: true,
-            success: (e) => {
-            }
-          })
           that.setData({
             isAuthorize: false
           });
@@ -55,40 +50,26 @@ Component({
           title: '授权登陆中...',
         })
         let info = res.detail.userInfo;
-        let params={};
+        let params = {};
+        params.code = app.globalData.code;
+        params.sex = info.gender+'';
         params.nickName = info.nickName;
-        params.headIcon = info.avatarUrl;
-        params.sex = info.gender;
-        params.address = `${info.country}，${info.province}，${info.city}`;
-        app.userLogin(1,params).then(res=>{
-          wx.hideLoading()
-          let getUserInfo = res.oneselfUserInfo;
-          app.globalData.userInfo = getUserInfo;
-          app.globalData.sessionId = res.sessionId;
-          wx.setStorageSync('sessionId', res.sessionId)
-          wx.setStorageSync('userInfo', getUserInfo)
-          this.setData({
-            isAuthorize: true
-          })
-          if (this.data.isTab) {
-            wx.showTabBar({
-              animation: true,
-              success: (e) => {
-                // console.log(e)
-              }
+        console.log(params)
+        indexApi.userLogin(params).then(res=>{
+          if(res.code==200){
+            wx.hideLoading()
+            let getData= res.data;
+            let userInfo = info;
+            userInfo.token = getData.token;
+            app.globalData.userInfo = userInfo;
+            app.globalData.token = getData.token;
+            wx.setStorageSync('token', getData.token)
+            wx.setStorageSync('userInfo', userInfo)
+            this.setData({
+              isAuthorize: true
             })
+            this.triggerEvent('sendUserInfo', userInfo)
           }
-          app.saveUserInfo(getUserInfo);
-          indexApi.showFirstModal(1).then(res=>{
-            if(res.state ==0){
-              wx.showToast({
-                title: res.message,
-                icon: 'none',
-                duration: 4000
-              })
-            }
-          })
-          this.triggerEvent('sendUserInfo', getUserInfo)
         }).catch(reject=>{
           wx.hideLoading()
           wx.showToast({

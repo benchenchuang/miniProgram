@@ -14,29 +14,41 @@ Page({
     isTodayWeek: false,
     todayIndex: 0,
     todayTime:0,
-    endDateTime:new Date('2019-11-18').getTime()
+    endDateTime: 0
   },
   selectDate(e){
     let selectTime = e.currentTarget.dataset.time;
     let selectDate = e.currentTarget.dataset.date;
-    if (selectTime < this.data.todayTime){
+    if (selectTime < this.data.todayTime || selectTime > this.data.endDateTime){
       return false;
     }
     this.setData({
       isDate: selectDate
     })
   },
+  //下一步
+  getDateNext(){
+    let selectDate = this.data.isDate;
+    wx.navigateTo({
+      url: `../reservationTime/index?date=${selectDate}`,
+    })
+    console.log(this.data.isDate)
+  },
   onLoad: function () {
+    this.dateInit();
     let now = new Date();
     let year = now.getFullYear();
     let month = now.getMonth() + 1;
-    this.dateInit();
+    let endDate= new Date(now);
+    endDate.setDate(now.getDate() + 30);
     this.setData({
       year: year,
       month: month,
       startMonth: new Date(''+year + '-' + month).getTime(),
-      isDate: year + '年' + month + '月' + now.getDate() + '日',
-      todayTime: new Date(year + '-' + month + '-' + now.getDate()).getTime()
+      isDate: year + '-' + this.getDoubleNum(month) + '-' + this.getDoubleNum(now.getDate()),
+      todayTime: new Date(year + '-' + this.getDoubleNum(month) + '-' + this.getDoubleNum(now.getDate())).getTime(),
+      endDateTime: endDate.getTime(),
+      limitedTime: new Date('2019-12-10').getTime()
     })
   },
   dateInit: function (setYear, setMonth) {
@@ -48,7 +60,7 @@ Page({
     let nextYear = 0;
     let month = setMonth || now.getMonth();//没有+1方便后面计算当月总天数
     let nextMonth = (month + 1) > 11 ? 1 : (month + 1);
-    let startWeek = new Date(year + ',' + (month + 1) + ',' + 1).getDay();//目标月1号对应的星期
+    let startWeek = new Date(year + '-' + this.getDoubleNum(month + 1) + '-' + '01').getDay();//目标月1号对应的星期
     let dayNums = new Date(year, nextMonth, 0).getDate();				//获取目标月有多少天
     let obj = {};
     let num = 0;
@@ -61,9 +73,9 @@ Page({
       if (i >= startWeek) {
         num = i - startWeek + 1;
         obj = {
-          isDate: year+'年' + (month + 1)+'月'+ num+'日',
+          isDate: year + '-' + this.getDoubleNum(month + 1) + '-' + this.getDoubleNum(num),
           dateNum: num,
-          dateTime: new Date(year + '-' + (month + 1) + '-'+ num).getTime()
+          dateTime: new Date(year + '-' + this.getDoubleNum(month + 1) + '-' + this.getDoubleNum(num)).getTime()
         }
       } else {
         obj = {};
@@ -73,7 +85,6 @@ Page({
     this.setData({
       dateArr: dateArr
     })
-
     let nowDate = new Date();
     let nowYear = nowDate.getFullYear();
     let nowMonth = nowDate.getMonth() + 1;
@@ -97,22 +108,25 @@ Page({
     //全部时间的月份都是按0~11基准，显示月份才+1
     let year = this.data.month - 2 < 0 ? this.data.year - 1 : this.data.year;
     let month = this.data.month - 2 < 0 ? 11 : this.data.month - 2;
+    this.dateInit(year, month);
     this.setData({
       year: year,
       month: (month + 1),
       thisMonth:new Date(year+'-'+(month+1)).getTime()
     })
-    this.dateInit(year, month);
   },
   nextMonth: function () {
     //全部时间的月份都是按0~11基准，显示月份才+1
     let year = this.data.month > 11 ? this.data.year + 1 : this.data.year;
     let month = this.data.month > 11 ? 0 : this.data.month;
+    this.dateInit(year, month);
     this.setData({
       year: year,
       month: (month + 1),
       thisMonth: new Date(''+year + '-' + (month + 1)).getTime()
     })
-    this.dateInit(year, month);
+  },
+  getDoubleNum(num){
+    return num<10?'0'+num:num
   }
 })

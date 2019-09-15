@@ -24,8 +24,8 @@
   -webkit-flex:1;
 }
 .exp_item.flex_full{
-  flex: 1.5;
-  -webkit-flex:1.5;
+  flex: 1.7;
+  -webkit-flex:1.7;
 }
 .exp_item::before{
   content: "";

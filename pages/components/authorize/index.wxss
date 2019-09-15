@@ -24,8 +24,12 @@
 }
 .authorize button,
 .button-hover{
-  width: 400rpx;
-  background: #f7be64;
+  width: 460rpx;
+  height: 110rpx;
+  line-height: 110rpx;
+  background: #3165ec;
+  border-radius: 110rpx;
+  font-size: 36rpx;
 }
 .statement{
   position: absolute;

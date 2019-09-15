@@ -1,9 +1,9 @@
-const baseUrl = 'https://personal.mekeai.com/api'; //上线的接口域名//wx1eda9a9c08e86fbe
+const baseUrl = 'https://cc.80mang.cn/reserve'; //上线的接口域名//wx1eda9a9c08e86fbe
 
 //获取token
-const getSessionId = () => {
-  var sessionId = wx.getStorageSync('sessionId')
-  return sessionId;
+const getToken = () => {
+  var token = wx.getStorageSync('token') || ''
+  return token;
 };
 /**
  * url:请求接口的短链接
@@ -11,9 +11,12 @@ const getSessionId = () => {
  * params:请求的参数
  */
 const sendRequest = (url, method, params) => {
-  // wx.showLoading({
-  //   title: '请求中，请耐心等待..'
-  // });
+  let token = getToken();
+  if(params){
+    params.token = token;
+  }else{
+    url = url + `&token=${token}`
+  }
   let promise = new Promise((resolve, reject) => {
     wx.request({
       url: `${baseUrl}/${url}`,
@@ -21,7 +24,7 @@ const sendRequest = (url, method, params) => {
       data: params,
       header: {
         'Content-Type': 'application/json',
-        'session_id': getSessionId()
+        'token': getToken()
       },
       complete: (res) => {
         // wx.hideLoading();

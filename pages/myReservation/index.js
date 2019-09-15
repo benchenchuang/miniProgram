@@ -1,14 +1,26 @@
 // pages/myReservation/index.js
+const app = getApp()
+const indexApi = require('../../api/index.js')
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-
+    status:'false',
+    isCancel:false,
+    telPhone: app.globalData.telPhone,
+    reservationData:null
+  },
+  callPhone() {
+    wx.makePhoneCall({
+      phoneNumber: this.data.telPhone
+    })
   },
   //取消预约
   cancelReservation(){
+    let that =this;
+    let durationId = this.data.reservationData.durationId;
+    let num = this.data.reservationData.num;
     wx.showModal({
       content: '是否取消预约',
       cancelText:'否',
@@ -17,17 +29,42 @@ Page({
       confirmColor:'#6490FE',
       success(res) {
         if (res.confirm) {
-          console.log('用户点击确定')
+          indexApi.cancelReservation({durationId,num}).then(res=>{
+            if(res.code==200){//取消成功
+              that.setData({
+                isCancel:true,
+                status: 'false',
+              })
+            }
+            console.log(res)
+          })
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
       }
     })
   },
+  //获取预约信息
+  getReservation() {
+    indexApi.getUserReservation().then(res => {
+      if (res.code == 200) {
+        this.setData({
+          reservationData : res.data
+        })
+      }
+      console.log(res)
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options && options.from){
+      this.setData({
+        status:options.from
+      })
+    }
+    this.getReservation();
     wx.hideShareMenu();
   },
 
@@ -56,7 +93,11 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    if(this.data.status=='success'){
+      wx.reLaunch({
+        url: '../index/index'
+      })
+    }
   },
 
   /**

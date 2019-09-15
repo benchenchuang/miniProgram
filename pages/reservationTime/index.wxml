@@ -12,23 +12,19 @@
 <view class="time_wrap">
   <view class="header">请选择时间段</view>
   <view class="times">
-    <view class="time">
-      <view class="exp_item fluent">11:00-12:00</view>
-    </view>
-    <view class="time">
-      <view class="exp_item fluent">11:00-12:00</view>
-    </view>
-    <view class="time">
-      <view class="exp_item fluent">11:00-12:00</view>
-    </view>
-    <view class="time">
-      <view class="exp_item fluent gray">11:00-12:00</view>
-    </view>
-    <view class="time">
-      <view class="exp_item fluent">11:00-12:00</view>
-    </view>
-    <view class="time">
-      <view class="exp_item fluent">11:00-12:00</view>
-    </view>
+    <block wx:for="{{durations}}" wx:key="index">
+      <view class="time" wx:if="{{item.status==0}}">
+        <view class="exp_item fluent" data-max="{{item.limited_num-item.current_num}}" data-id="{{item.id}}" data-status="{{item.status}}" bindtap="selectTime">{{item.duration}}</view>
+      </view>
+      <view class="time" wx:elif="{{item.status==1}}">
+        <view class="exp_item same" data-max="{{item.limited_num-item.current_num}}" data-id="{{item.id}}" data-status="{{item.status}}" bindtap="selectTime">{{item.duration}}</view>
+      </view>
+      <view class="time" wx:elif="{{item.status==2}}">
+        <view class="exp_item crowd" data-max="{{item.limited_num-item.current_num}}" data-id="{{item.id}}" data-status="{{item.status}}" bindtap="selectTime">{{item.duration}}</view>
+      </view>
+      <view class="time" wx:else>
+        <view class="exp_item gray">{{item.duration}}</view>
+      </view>
+    </block>
   </view>
 </view>

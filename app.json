@@ -4,7 +4,9 @@
     "pages/logs/logs",
     "pages/myReservation/index",
     "pages/reservationDate/index",
-    "pages/reservationTime/index"
+    "pages/reservationTime/index",
+    "pages/reservationNumber/index",
+    "pages/buyTickets/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

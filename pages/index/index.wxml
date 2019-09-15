@@ -1,11 +1,29 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container" catchtouchmove="stopDrag">
   <image class="container_bg" src="../../images/bg.jpg" mode="aspectFill"></image>
   <view class="control_btns">
-    <text class="common_btn active_btn">点击预约</text>
-    <navigator class="common_btn primary_btn" url="../myReservation/index" hover-class="none">我的预约</navigator>
+    <text class="common_btn active_btn" bindtap="reservationHandle">点击预约</text>
+    <text class="common_btn primary_btn" bindtap="goMyReservation">我的预约</text>
   </view>
 </view>
-<!-- 授权
-<is-authorize bind:sendUserInfo="getAuthorize" wx:if="{{isToAuthorize}}" is-tab="{{true}}"></is-authorize>
- -->
+<view class="mask mask_isBuy" wx:if="{{buyMask}}">
+  <view class="mask_modal">
+    <view class="mask_content">请确认已购买teamLab未来游乐园入场券？</view>
+    <view class="mask_btn active_link" bindtap="sureBuyHandle">已购买</view>
+    <view class="mask_btn active_link" bindtap="goBuyTickets">未购买，马上购买</view>
+    <view class="mask_btn" bindtap="cancelBuyMadal">取消</view>
+  </view>
+</view>
+<view class="mask mask_isReserve" wx:if="{{reserveMask}}">
+  <view class="mask_modal">
+    <view class="mask_content">预约须知</view>
+    <view class="mask_desc">
+      <view class="desc">1.一个id只能同时预约一次，单次预约上限6人，团队预约请致电 <text bindtap="callPhone" class="tel">{{telPhone}}</text>。</view>
+      <view class="desc">2.如需更改预约日期，需取消预约后再进行预约。</view>
+      <view class="desc">3.如错过预约时间需重新预约。</view>
+    </view>
+    <navigator class="mask_btn active_link" url="../reservationDate/index" hover-class="none">知道了</navigator>
+  </view>
+</view>
+<is-authorize bind:sendUserInfo="getAuthorize" wx:if="{{isToAuthorize}}"></is-authorize>
+
