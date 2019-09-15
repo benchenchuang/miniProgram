@@ -39,23 +39,30 @@ Page({
     let now = new Date();
     let year = now.getFullYear();
     let month = now.getMonth() + 1;
-    let endDate= new Date(now);
+    let todayTime = new Date(year + '-' + this.getDoubleNum(month) + '-' + this.getDoubleNum(now.getDate())).getTime();
+    let startTime = new Date('2019-09-15').getTime();
+    let endDate = startTime > todayTime ? new Date('2019-09-15'):new Date(now);
     endDate.setDate(now.getDate() + 30);
     this.setData({
       year: year,
-      month: month,
-      startMonth: new Date(''+year + '-' + month).getTime(),
-      isDate: year + '-' + this.getDoubleNum(month) + '-' + this.getDoubleNum(now.getDate()),
-      todayTime: new Date(year + '-' + this.getDoubleNum(month) + '-' + this.getDoubleNum(now.getDate())).getTime(),
+      month: startTime > todayTime ?10:month,
+      startMonth: startTime > todayTime ? new Date('2019-09').getTime():new Date(''+year + '-' + month).getTime(),
+      isDate: startTime > todayTime ?'2019-09-15':year + '-' + this.getDoubleNum(month) + '-' + this.getDoubleNum(now.getDate()),
+      todayTime: startTime > todayTime ? startTime:todayTime,
       endDateTime: endDate.getTime(),
-      limitedTime: new Date('2019-12-10').getTime()
+      limitedTime: new Date('2020-03-01').getTime()
     })
   },
   dateInit: function (setYear, setMonth) {
+    let thisDate = new Date();
+    let thisYear = thisDate.getFullYear();
+    let thisMonth = thisDate.getMonth() + 1;
+    let todayTime = new Date(thisYear + '-' + this.getDoubleNum(thisMonth) + '-' + this.getDoubleNum(thisDate.getDate())).getTime();
+    let startTime = new Date('2019-09-15').getTime();
     //全部时间的月份都是按0~11基准，显示月份才+1
     let dateArr = [];						//需要遍历的日历数组数据
     let arrLen = 0;							//dateArr的数组长度
-    let now = setYear ? new Date(setYear, setMonth) : new Date();
+    let now = setYear ? new Date(setYear, setMonth) : (startTime > todayTime ? new Date('2019-09-15'):new Date());
     let year = setYear || now.getFullYear();
     let nextYear = 0;
     let month = setMonth || now.getMonth();//没有+1方便后面计算当月总天数

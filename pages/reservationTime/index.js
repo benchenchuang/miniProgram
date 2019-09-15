@@ -18,6 +18,9 @@ Page({
       url: `../reservationNumber/index?durationId=${durationId}&status=${status}&max=${max}`,
     })
   },
+  getDoubleNum(num) {
+    return num < 10 ? '0' + num : num
+  },
   //获取特定日期的时间段
   getTimes(date){
     let params={
@@ -29,9 +32,27 @@ Page({
         day: date 
       }
     }
+    let nowDate = new Date();
+    let dateFormal = nowDate.getFullYear() + '-' + this.getDoubleNum(nowDate.getMonth() + 1) + '-' + this.getDoubleNum(nowDate.getDate())
+    let thisDate = new Date(dateFormal)
+    let selectDate = new Date(date)
+    let reduceTime = selectDate - thisDate;
     commonApi.getReservationTimes(params).then(res => {
       if(res.code==200){
-        let getDurations = res.data.records;
+        let getDurations = [];
+        if(reduceTime){
+          getDurations = res.data.records;
+        }else{
+          let nowTime = nowDate.getTime();
+          let getRecords = res.data.records;
+          getRecords.map(item=>{
+            let endTime = new Date(dateFormal+' '+item.duration.split('-')[1]+':00').getTime();
+            if(endTime-nowTime < 5*60*1000){
+              item.status = '3'
+            }
+            getDurations.push(item)
+          })
+        }
         this.setData({
           durations: getDurations
         })
