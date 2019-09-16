@@ -6,7 +6,7 @@
       <view class="status_txt">预约成功！</view>
     </view>
     <view class="reservation_header">
-      <text class="title">teamLab未来游乐园展览</text>
+      <text class="title">昆明恒隆广场teamLab未来游乐园展览</text>
       <text class="status_cancel" wx:if="{{isCancel}}">已取消</text>
       <text class="status_success" wx:elif="{{reservationData.status==1}}">预约成功</text>
     </view>

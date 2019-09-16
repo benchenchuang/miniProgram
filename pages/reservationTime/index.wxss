@@ -30,7 +30,7 @@
 .exp_item::before{
   content: "";
   position: absolute;
-  top: 8rpx;
+  top: 10rpx;
   left: -32rpx;
   width: 24rpx;
   height: 24rpx;
