@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <view class="container" catchtouchmove="stopDrag">
+  <image class="logo" src="../../images/logo.png" mode="widthFix"></image>
   <image class="container_bg" src="../../images/bg.jpg" mode="aspectFill"></image>
   <view class="control_btns">
     <text class="common_btn active_btn" bindtap="reservationHandle">点击预约</text>
