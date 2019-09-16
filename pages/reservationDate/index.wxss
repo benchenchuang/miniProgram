@@ -76,7 +76,8 @@
   position: fixed;
   left: 30rpx;
   right: 30rpx;
-  bottom: 300rpx;
+  bottom: 250rpx;
+  line-height: 1.8;
   font-size: 28rpx;
   color: #84848C;
   text-align: center;
