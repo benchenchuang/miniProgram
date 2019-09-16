@@ -80,3 +80,9 @@
   color: #626B80;
   text-align: center;
 }
+.my_show{
+  font-size: 30rpx;
+  text-align: center;
+  padding-top: 20px;
+  color: #84848C;
+}

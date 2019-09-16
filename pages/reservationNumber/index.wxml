@@ -2,6 +2,7 @@
 <view class="container">
   <image class="container_bg" src="../../images/bg.jpg" mode="aspectFill"></image>
   <view class="modal">
+    <view class="my_show">已选择时间：{{date}} {{duration}}</view>
     <view class="header">预约参观人数</view>
     <view class="box">
       <view class="set">

@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    durations:[]
+    durations:[],
+    date:null
   },
   //选择时间
   selectTime(e){
@@ -14,8 +15,10 @@ Page({
     let durationId = e.currentTarget.dataset.id;
     let status = e.currentTarget.dataset.status;
     let max = e.currentTarget.dataset.max;
+    let duration = e.currentTarget.dataset.duration;
+    let date = this.data.date;
     wx.navigateTo({
-      url: `../reservationNumber/index?durationId=${durationId}&status=${status}&max=${max}`,
+      url: `../reservationNumber/index?durationId=${durationId}&status=${status}&max=${max}&date=${date}&duration=${duration}`,
     })
   },
   getDoubleNum(num) {
@@ -66,6 +69,9 @@ Page({
    */
   onLoad: function (options) {
     let date = options.date;
+    this.setData({
+    	date:date
+    })
     this.getTimes(date);
   },
 

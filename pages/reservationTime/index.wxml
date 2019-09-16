@@ -14,13 +14,13 @@
   <view class="times">
     <block wx:for="{{durations}}" wx:key="index">
       <view class="time" wx:if="{{item.status==0}}">
-        <view class="exp_item fluent" data-max="{{item.limited_num-item.current_num}}" data-id="{{item.id}}" data-status="{{item.status}}" bindtap="selectTime">{{item.duration}}</view>
+        <view class="exp_item fluent" data-duration="{{item.duration}}" data-max="{{item.limited_num-item.current_num}}" data-id="{{item.id}}" data-status="{{item.status}}" bindtap="selectTime">{{item.duration}}</view>
       </view>
       <view class="time" wx:elif="{{item.status==1}}">
-        <view class="exp_item same" data-max="{{item.limited_num-item.current_num}}" data-id="{{item.id}}" data-status="{{item.status}}" bindtap="selectTime">{{item.duration}}</view>
+        <view class="exp_item same" data-duration="{{item.duration}}" data-max="{{item.limited_num-item.current_num}}" data-id="{{item.id}}" data-status="{{item.status}}" bindtap="selectTime">{{item.duration}}</view>
       </view>
       <view class="time" wx:elif="{{item.status==2}}">
-        <view class="exp_item crowd" data-max="{{item.limited_num-item.current_num}}" data-id="{{item.id}}" data-status="{{item.status}}" bindtap="selectTime">{{item.duration}}</view>
+        <view class="exp_item crowd" data-duration="{{item.duration}}" data-max="{{item.limited_num-item.current_num}}" data-id="{{item.id}}" data-status="{{item.status}}" bindtap="selectTime">{{item.duration}}</view>
       </view>
       <view class="time" wx:else>
         <view class="exp_item gray">{{item.duration}}</view>

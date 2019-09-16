@@ -75,6 +75,8 @@ Page({
     let durationId = options.durationId;
     let status = options.status;
     let max = options.max;
+    let date = options.date;
+    let duration = options.duration;
     let maxNum =6;
     let peopleNum =this.peopleNum;
     if(max<=6){
@@ -83,6 +85,8 @@ Page({
     this.setData({
       maxNum: maxNum,
       status:status,
+      date:date,
+      duration:duration,
       durationId:durationId
     })
 
