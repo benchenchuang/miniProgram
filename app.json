@@ -14,5 +14,8 @@
     "navigationBarTitleText": "昆明恒隆未来游乐园",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "navigateToMiniProgramAppIdList": [
+    "wxf22d0e0349262efc"
+  ]
 }

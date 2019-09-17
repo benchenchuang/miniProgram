@@ -9,7 +9,8 @@ Page({
     status:'false',
     isCancel:false,
     telPhone: app.globalData.telPhone,
-    reservationData:null
+    reservationData:null,
+    isOverTime:false
   },
   callPhone() {
     wx.makePhoneCall({
@@ -46,10 +47,22 @@ Page({
   },
   //获取预约信息
   getReservation() {
+    let nowDate = new Date();
+    let nowTime = nowDate.getTime();
     indexApi.getUserReservation().then(res => {
       if (res.code == 200) {
+        let reservationData= res.data;
+        let timeRange = reservationData.duration.split('-')[1].split(':');
+        let dayRang = reservationData.day.split('-');
+        let endTime = new Date(dayRang[0], (dayRang[1]-1), dayRang[2], Number(timeRange[0]), Number(timeRange[1]), 0).getTime();
+        if ((nowTime - endTime)>0){
+          console.log(1)
+          this.setData({
+            isOverTime:true
+          })
+        }
         this.setData({
-          reservationData : res.data
+          reservationData: reservationData
         })
       }
       console.log(res)

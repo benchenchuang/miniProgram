@@ -13,7 +13,7 @@ Page({
   },
   goBuyTickets(){
     wx.navigateToMiniProgram({
-      appId: '',
+      appId: 'wxf22d0e0349262efc',
       path: 'page/index/index?id=123',
       envVersion: 'develop',
       success(res) {

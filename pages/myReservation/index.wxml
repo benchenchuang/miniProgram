@@ -38,6 +38,6 @@
     </view>
   </view>
   <navigator url="../reservationDate/index" wx:if="{{isCancel}}" hover-class="none" class="common_btn active_btn">重新预约</navigator>
-  <text class="common_btn primary_btn" wx:elif="{{reservationData.status==1 && status!='success'}}" bindtap="cancelReservation">取消预约</text>
-  <navigator url="../buyTickets/index" hover-class="none" wx:elif="{{status=='success'}}" class="common_btn active_btn static_btn">获得更多优惠</navigator>
+  <text class="common_btn primary_btn" wx:elif="{{reservationData.status==1 && status!='success' && !isOverTime}}" bindtap="cancelReservation">取消预约</text>
+  <navigator url="../buyTickets/index" hover-class="none" wx:elif="{{status=='success' || isOverTime}}" class="common_btn active_btn static_btn">获得更多优惠</navigator>
 </view>
