@@ -55,10 +55,16 @@ Page({
         }, 1000)
       }else{
         wx.showToast({
-          title: '预约失败，请重试！',
+          title: res.message,
           icon: 'none',
           duration: 1000
         });
+        wx.clearStorageSync('token')
+        setTimeout(() => {
+          wx.reLaunch({
+            url: '../index/index'
+          })
+        }, 1000)
       }
     })
   },
@@ -72,6 +78,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.hideShareMenu();
     let durationId = options.durationId;
     let status = options.status;
     let max = options.max;
