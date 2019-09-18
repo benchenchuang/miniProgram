@@ -45,7 +45,7 @@ Page({
       })
     }else{
       this.setData({
-        buyMask: true
+        reserveMask: true
       });
     }
   },
@@ -61,7 +61,7 @@ Page({
       })
     } else {
       this.setData({
-        buyMask: true
+        reserveMask: true
       });
     }
   },
