@@ -21,20 +21,20 @@ Component({
   ready() {
     let that = this;
     let userId = wx.getStorageSync('token')
-    wx.getSetting({
-      success(res) {
-        console.log(res)
-        if (res.authSetting['scope.userInfo'] && userId) {
-          that.setData({
-            isAuthorize: true
-          })
-        }else{
-          that.setData({
-            isAuthorize: false
-          });
-        }
-      }
-    })
+    // wx.getSetting({
+    //   success(res) {
+    //     console.log(res)
+    //     if (res.authSetting['scope.userInfo'] && userId) {
+    //       that.setData({
+    //         isAuthorize: true
+    //       })
+    //     }else{
+    //       that.setData({
+    //         isAuthorize: false
+    //       });
+    //     }
+    //   }
+    // })
   },
   /**
    * 组件的方法列表

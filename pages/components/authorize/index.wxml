@@ -1,5 +1,5 @@
 <!--pages_card/component/authorize/index.wxml-->
-<view class='authorize_wrap' wx:if="{{!isAuthorize}}" catchtouchmove='noScroll' catchtouchend='noScroll'>
+<view class='authorize_wrap' wx:if="{{isAuthorize}}" catchtouchmove='noScroll' catchtouchend='noScroll'>
   <view class='authorize'>
     <view class='tip'>亲，点击授权后才可预约</view>
     <button open-type="getUserInfo" hover-class="btn-hover" bindgetuserinfo="openAuthorize" class='authorize_btn' type='primary'>授权登录</button>
