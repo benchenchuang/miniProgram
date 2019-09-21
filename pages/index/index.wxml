@@ -7,8 +7,8 @@
     <text class="common_btn primary_btn" bindtap="goMyReservation">我的预约</text>
   </view>
   <view class="control_btns" wx:else>
-    <button open-type="getUserInfo" class="common_btn active_btn" bindgetuserinfo="bindGetUserInfo">点击预约</button>
-    <button open-type="getUserInfo" class="common_btn primary_btn" bindgetuserinfo="bindGetUserInfo">我的预约</button>
+    <button open-type="getUserInfo" data-type="reservation" class="common_btn active_btn" bindgetuserinfo="bindGetUserInfo">点击预约</button>
+    <button open-type="getUserInfo" data-type="myReservation" class="common_btn primary_btn" bindgetuserinfo="bindGetUserInfo">我的预约</button>
   </view>
 </view>
 <view class="mask mask_isBuy" wx:if="{{buyMask}}">

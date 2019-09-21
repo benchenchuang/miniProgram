@@ -29,6 +29,7 @@ Page({
     this.getReservation();
   },
   bindGetUserInfo(res){
+    let type = res.currentTarget.dataset.type;
     if (res.detail.userInfo) {
       wx.showLoading({
         title: '授权登陆中...',
@@ -51,7 +52,7 @@ Page({
           this.setData({
             isAuthorize: true
           });
-          this.getReservation();
+          this.getReservation(type);
         }
       }).catch(reject => {
         wx.hideLoading()
@@ -128,7 +129,7 @@ Page({
       url: '../logs/logs'
     })
   },
-  getReservation() {
+  getReservation(type="") {
     indexApi.getUserReservation().then(res => {
       if(res.code==200){
         if(res.data && res.data.num){
@@ -154,6 +155,11 @@ Page({
             isOnce:true
           })
         }
+      }
+      if(type=='reservation'){
+        this.reservationHandle();
+      }else if(type=='myReservation'){
+        this.goMyReservation();
       }
     })
   },
