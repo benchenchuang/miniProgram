@@ -17,7 +17,8 @@
         <view class="tip">预约上限{{maxNum}}人，如需团体预约可致电</view>
         <view class="tip" bindtap="callReservation">{{telPhone}}</view>
       </view>
-      <text class="common_btn active_btn" bindtap="clickReservation">点击预约</text>
+      <text class="common_btn active_btn" wx:if="{{isAuthorize}}" bindtap="clickReservation">点击预约</text>
+      <button open-type="getUserInfo" wx:else class="common_btn active_btn" bindgetuserinfo="bindGetUserInfo">点击预约</button>
     </view>
   </view>
 </view>

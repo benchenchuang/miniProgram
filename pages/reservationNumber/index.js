@@ -1,6 +1,6 @@
 // pages/reservationNumber/index.js
 const app = getApp()
-const commonApi = require('../../api/index.js')
+const indexApi = require('../../api/index.js')
 Page({
   /**
    * 页面的初始数据
@@ -10,7 +10,8 @@ Page({
     peopleNum:1,
     maxNum:6,
     status: '0',
-    durationId: ''
+    durationId: '',
+    isAuthorize: false,
   },
   //减少人数
   reduceHandle(){
@@ -40,7 +41,7 @@ Page({
     let status = this.data.status;
     let durationId = this.data.durationId;
     let num = this.data.peopleNum;
-    commonApi.postUserReservation({ status, durationId,num}).then(res=>{
+    indexApi.postUserReservation({ status, durationId,num}).then(res=>{
       wx.hideLoading()
       if(res.code==200){
         wx.showToast({
@@ -96,7 +97,6 @@ Page({
       duration:duration,
       durationId:durationId
     })
-
   },
 
   /**
@@ -110,7 +110,95 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this;
+    let userId = wx.getStorageSync('token')
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.userInfo'] && userId) {
+          that.setData({
+            isAuthorize: true
+          });
+        } else {
+          that.setData({
+            isAuthorize: false
+          });
+        }
+      }
+    })
+  },
+  //获取预约信息
+  getReservation() {
+    let nowDate = new Date();
+    let nowTime = nowDate.getTime();
+    indexApi.getUserReservation().then(res => {
+      if (res.code == 200) {
+        let reservationData = res.data;
+        let timeRange = reservationData.duration.split('-')[1].split(':');
+        let dayRang = reservationData.day.split('-');
+        let endTime = new Date(dayRang[0], (dayRang[1] - 1), dayRang[2], Number(timeRange[0]), Number(timeRange[1]), 0).getTime();
+        if ((nowTime - endTime) > 0) {
+          console.log(1)
+          this.setData({
+            isOverTime: true
+          })
+        }
+        //已授权并有预约信息
+        wx.showToast({
+          title: '已有预约信息',
+          duration: 1500
+        });
+        setTimeout(() => {
+          wx.redirectTo({
+            url: '../myReservation/index',
+          })
+        }, 1500)
+      } else {
+        //未预约 直接预约
+        this.clickReservation()
+      }
+    })
+  },
+  //点击授权
+  bindGetUserInfo(res) {
+    if (res.detail.userInfo) {
+      wx.showLoading({
+        title: '授权登陆中...',
+      })
+      let info = res.detail.userInfo;
+      let params = {};
+      params.code = app.globalData.code;
+      params.sex = info.gender + '';
+      params.nickName = info.nickName;
+      indexApi.userLogin(params).then(res => {
+        if (res.code == 200) {
+          wx.hideLoading()
+          let getData = res.data;
+          let userInfo = info;
+          userInfo.token = getData.token;
+          app.globalData.userInfo = userInfo;
+          app.globalData.token = getData.token;
+          wx.setStorageSync('token', getData.token)
+          wx.setStorageSync('userInfo', userInfo);
+          this.setData({
+            isAuthorize:true
+          });
+          this.getReservation();
+        }
+      }).catch(reject => {
+        wx.hideLoading()
+        wx.showToast({
+          title: reject.message,
+          icon: 'none',
+          duration: 1000
+        })
+      })
+    } else {
+      wx.showToast({
+        title: '授权失败',
+        icon: 'none',
+        duration: 1000
+      })
+    }
   },
 
   /**

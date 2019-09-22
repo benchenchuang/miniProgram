@@ -10,12 +10,54 @@ Page({
     isCancel:false,
     telPhone: app.globalData.telPhone,
     reservationData:null,
-    isOverTime:false
+    isOverTime:false,
+    isAuthorize: false,
+    buyMask:false,
+    reserveMask:false
   },
   callPhone() {
     wx.makePhoneCall({
       phoneNumber: this.data.telPhone
     })
+  },
+  //点击授权
+  bindGetUserInfo(res){
+    if (res.detail.userInfo) {
+      wx.showLoading({
+        title: '授权登陆中...',
+      })
+      let info = res.detail.userInfo;
+      let params = {};
+      params.code = app.globalData.code;
+      params.sex = info.gender + '';
+      params.nickName = info.nickName;
+      indexApi.userLogin(params).then(res => {
+        if (res.code == 200) {
+          wx.hideLoading()
+          let getData = res.data;
+          let userInfo = info;
+          userInfo.token = getData.token;
+          app.globalData.userInfo = userInfo;
+          app.globalData.token = getData.token;
+          wx.setStorageSync('token', getData.token)
+          wx.setStorageSync('userInfo', userInfo);
+          this.getReservation();
+        }
+      }).catch(reject => {
+        wx.hideLoading()
+        wx.showToast({
+          title: reject.message,
+          icon: 'none',
+          duration: 1000
+        })
+      })
+    } else {
+      wx.showToast({
+        title: '授权失败',
+        icon: 'none',
+        duration: 1000
+      })
+    }
   },
   //取消预约
   cancelReservation(){
@@ -45,6 +87,32 @@ Page({
       }
     })
   },
+  //确定购买
+  sureBuyHandle() {
+    this.setData({
+      buyMask: false,
+      reserveMask: true
+    });
+  },
+  goBuyTickets() {
+    wx.navigateToMiniProgram({
+      appId: 'wxd6fe1d1b1a33df84',
+      path: 'pages/index/index',
+      envVersion: 'release',
+      success(res) {
+        
+      }
+    })
+  },
+  //取消提示
+  cancelBuyMadal() {
+    this.setData({
+      buyMask: false
+    });
+    wx.redirectTo({
+      url: '../index/index',
+    })
+  },
   //获取预约信息
   getReservation() {
     let nowDate = new Date();
@@ -62,10 +130,15 @@ Page({
           })
         }
         this.setData({
-          reservationData: reservationData
+          reservationData: reservationData,
+          isAuthorize: true
+        });
+      }else{
+        this.setData({
+          buyMask:true,
+          isAuthorize: true
         })
       }
-      console.log(res)
     })
   },
   /**
@@ -77,8 +150,8 @@ Page({
         status:options.from
       })
     }
-    this.getReservation();
     wx.hideShareMenu();
+    
   },
 
   /**
@@ -92,7 +165,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this;
+    let userId = wx.getStorageSync('token')
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.userInfo'] && userId) {
+          that.setData({
+            isAuthorize: true
+          });
+          that.getReservation();
+        } else {
+          that.setData({
+            isAuthorize: false
+          });
+        }
+      }
+    })
   },
 
   /**

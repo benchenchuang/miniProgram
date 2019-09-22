@@ -1,5 +1,5 @@
 <!--pages/myReservation/index.wxml-->
-<view class="reservation">
+<view class="reservation" wx:if="{{isAuthorize}}">
   <view class="reservation_wrap">
     <view class="reservation_status" wx:if="{{status=='success'}}">
       <image class="status_icon" src="../../images/icon-success.png" mode="widthFix"></image>
@@ -13,11 +13,11 @@
     <view class="reservation_box">
       <view class="item">
         <text class="label">预约时间</text>
-        <text class="content">{{reservationData.day}} / {{reservationData.duration}}</text>
+        <text class="content">{{reservationData.day || '0000-00-00'}} / {{reservationData.duration || '00：00'}}</text>
       </view>
       <view class="item">
         <text class="label">预约人数</text>
-        <text class="content">{{reservationData.num}}人</text>
+        <text class="content">{{reservationData.num || 0}}人</text>
       </view>
       <view class="item">
         <text class="label">换票须知</text>
@@ -40,4 +40,29 @@
   <navigator url="../reservationDate/index" wx:if="{{isCancel}}" hover-class="none" class="common_btn active_btn">重新预约</navigator>
   <text class="common_btn primary_btn" wx:elif="{{reservationData.status==1 && status!='success' && !isOverTime}}" bindtap="cancelReservation">取消预约</text>
   <navigator url="../buyTickets/index" hover-class="none" wx:elif="{{status=='success' || isOverTime}}" class="common_btn active_btn static_btn">获得更多优惠</navigator>
+</view>
+<view class="non_info" wx:else>
+  <view class="text">暂未授权，请先授权获得预约信息</view>
+  <button open-type="getUserInfo" class="common_btn active_btn" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+</view>
+
+
+<view class="mask mask_isBuy" wx:if="{{buyMask}}">
+  <view class="mask_modal">
+    <view class="mask_content">请确认已购买teamLab未来游乐园入场券？</view>
+    <view class="mask_btn active_link" bindtap="sureBuyHandle">已购买</view>
+    <view class="mask_btn active_link" bindtap="goBuyTickets">未购买，马上购买</view>
+    <view class="mask_btn" bindtap="cancelBuyMadal">取消</view>
+  </view>
+</view>
+<view class="mask mask_isReserve" wx:if="{{reserveMask}}">
+  <view class="mask_modal">
+    <view class="mask_content">预约须知</view>
+    <view class="mask_desc">
+      <view class="desc">1.一个id只能同时预约一次，单次预约上限6人，团队预约请致电 <text bindtap="callPhone" class="tel">{{telPhone}}</text>。</view>
+      <view class="desc">2.如需更改预约日期，需取消预约后再进行预约。</view>
+      <view class="desc">3.如错过预约时间需重新预约。</view>
+    </view>
+    <navigator class="mask_btn active_link" url="../reservationDate/index" hover-class="none">知道了</navigator>
+  </view>
 </view>

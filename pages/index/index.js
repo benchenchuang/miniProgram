@@ -92,19 +92,22 @@ Page({
   },
   //我的预约
   goMyReservation(){
-    if (this.data.isReservation) {//已经有预约信息
-      wx.navigateTo({
-        url: '../myReservation/index',
-      })
-    }else if(this.data.isOnce){
-      wx.navigateTo({
-        url: '../reservationDate/index',
-      })
-    } else {
-      this.setData({
-        buyMask: true
-      });
-    }
+    wx.navigateTo({
+      url: '../myReservation/index',
+    })
+    // if (this.data.isReservation) {//已经有预约信息
+    //   wx.navigateTo({
+    //     url: '../myReservation/index',
+    //   })
+    // }else if(this.data.isOnce){
+    //   wx.navigateTo({
+    //     url: '../reservationDate/index',
+    //   })
+    // } else {
+    //   this.setData({
+    //     buyMask: true
+    //   });
+    // }
   },
   stopDrag(){
     return false;

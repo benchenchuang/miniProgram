@@ -1,4 +1,5 @@
 /* pages/myReservation/index.wxss */
+@import '../index/index.wxss';
 page{
   background: #F2F4FC;
 }
@@ -72,4 +73,13 @@ page{
 .reservation .static_btn{
   margin: 40rpx 30rpx;
   position: static;
+}
+.non_info{
+  text-align: center;
+  font-size: 24rpx;
+  color: #888;
+  margin: 400rpx 30rpx 0;
+}
+.non_info .common_btn{
+  margin-top: 30rpx;
 }
