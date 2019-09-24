@@ -194,7 +194,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    if(this.data.status=='success'){
+    if (this.data.status == 'success' || this.data.status == 'exist'){
       wx.reLaunch({
         url: '../index/index'
       })

@@ -149,7 +149,7 @@ Page({
         });
         setTimeout(() => {
           wx.redirectTo({
-            url: '../myReservation/index',
+            url: '../myReservation/index?from=exist',
           })
         }, 1500)
       } else {
