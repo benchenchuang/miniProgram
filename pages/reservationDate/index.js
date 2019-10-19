@@ -42,7 +42,13 @@ Page({
     let todayTime = new Date(year + '-' + this.getDoubleNum(month) + '-' + this.getDoubleNum(now.getDate())).getTime();
     let startTime = new Date('2019-10-18').getTime();
     let endDate = startTime > todayTime ? new Date('2019-10-18'):new Date(now);
-    endDate.setDate(now.getDate() + 30);
+    let crisisTime = new Date('2019-12-01').getTime();
+    let nowTime = now.getTime();
+    if(nowTime>crisisTime){
+        endDate.setDate(now.getDate() + 30);
+    }else{
+        endDate=new Date('Dec 31, 2019 23:59:59');
+    }
     this.setData({
       year: year,
       month: startTime > todayTime ?10:month,
