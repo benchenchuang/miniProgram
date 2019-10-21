@@ -40,8 +40,8 @@ Page({
     let year = now.getFullYear();
     let month = now.getMonth() + 1;
     let todayTime = new Date(year + '-' + this.getDoubleNum(month) + '-' + this.getDoubleNum(now.getDate())).getTime();
-    let startTime = new Date('2019-10-18').getTime();
-    let endDate = startTime > todayTime ? new Date('2019-10-18'):new Date(now);
+    let startTime = new Date('2019-11-04').getTime();
+    let endDate = startTime > todayTime ? new Date('2019-11-04'):new Date(now);
     let crisisTime = new Date('2019-12-01').getTime();
     let nowTime = now.getTime();
     if(nowTime>crisisTime){
@@ -51,9 +51,9 @@ Page({
     }
     this.setData({
       year: year,
-      month: startTime > todayTime ?10:month,
-      startMonth: startTime > todayTime ? new Date('2019-10').getTime():new Date(''+year + '-' + month).getTime(),
-      isDate: startTime > todayTime ?'2019-10-18':year + '-' + this.getDoubleNum(month) + '-' + this.getDoubleNum(now.getDate()),
+      month: startTime > todayTime ?11:month,
+      startMonth: startTime > todayTime ? new Date('2019-11').getTime():new Date(''+year + '-' + month).getTime(),
+      isDate: startTime > todayTime ?'2019-11-04':year + '-' + this.getDoubleNum(month) + '-' + this.getDoubleNum(now.getDate()),
       todayTime: startTime > todayTime ? startTime:todayTime,
       endDateTime: endDate.getTime(),
       limitedTime: new Date('2020-03-01').getTime()
@@ -64,11 +64,11 @@ Page({
     let thisYear = thisDate.getFullYear();
     let thisMonth = thisDate.getMonth() + 1;
     let todayTime = new Date(thisYear + '-' + this.getDoubleNum(thisMonth) + '-' + this.getDoubleNum(thisDate.getDate())).getTime();
-    let startTime = new Date('2019-10-18').getTime();
+    let startTime = new Date('2019-11-04').getTime();
     //全部时间的月份都是按0~11基准，显示月份才+1
     let dateArr = [];						//需要遍历的日历数组数据
     let arrLen = 0;							//dateArr的数组长度
-    let now = setYear ? new Date(setYear, setMonth) : (startTime > todayTime ? new Date('2019-10-18'):new Date());
+    let now = setYear ? new Date(setYear, setMonth) : (startTime > todayTime ? new Date('2019-11-04'):new Date());
     let year = setYear || now.getFullYear();
     let nextYear = 0;
     let month = setMonth || now.getMonth();//没有+1方便后面计算当月总天数
