@@ -8,7 +8,7 @@ Page({
   data: {
     telPhone: app.globalData.telPhone,
     peopleNum:1,
-    maxNum:6,
+    maxNum:10,
     status: '0',
     durationId: '',
     isAuthorize: false,
@@ -85,9 +85,9 @@ Page({
     let max = options.max;
     let date = options.date;
     let duration = options.duration;
-    let maxNum =6;
+    let maxNum =this.data.maxNum;
     let peopleNum =this.peopleNum;
-    if(max<=6){
+    if(max<=maxNum){
       maxNum = max;
     }
     this.setData({
