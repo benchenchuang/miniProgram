@@ -32,7 +32,7 @@
   <view class="tip_content">
     <view wx:if="{{isCancel}}" class="tip">您已成功取消{{reservationData.day}} / {{reservationData.duration}}时段预约。如需再次预约，点击下方选项。</view>
     <view wx:elif="{{status=='success' || reservationData.status==1}}">
-      <view class="tip">1.一个ID只能同时预约一次，单次预约上限6人。团队预约请致电<text bindtap="callPhone">{{telPhone}}</text>。</view>
+      <view class="tip">1.一个ID只能同时预约一次，单次预约上限6人。团队预约请致电<text bindtap="callPhone">{{telPhone}}</text>（服务时间：上午10点至下午10点）。</view>
       <view class="tip">2.如需更改预约日期，需取消预约后再进行预约。</view>
       <view class="tip">3.如错过预约时间需重新预约。</view>
     </view>
@@ -59,7 +59,7 @@
   <view class="mask_modal">
     <view class="mask_content">预约须知</view>
     <view class="mask_desc">
-      <view class="desc">1.一个id只能同时预约一次，单次预约上限6人，团队预约请致电 <text bindtap="callPhone" class="tel">{{telPhone}}</text>。</view>
+      <view class="desc">1.一个id只能同时预约一次，单次预约上限6人，团队预约请致电 <text bindtap="callPhone" class="tel">{{telPhone}}</text>（服务时间：上午10点至下午10点）。</view>
       <view class="desc">2.如需更改预约日期，需取消预约后再进行预约。</view>
       <view class="desc">3.如错过预约时间需重新预约。</view>
     </view>
