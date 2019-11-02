@@ -11,7 +11,7 @@ Page({
     maxNum:10,
     status: '0',
     durationId: '',
-    isAuthorize: false,
+    isAuthorize: false
   },
   //减少人数
   reduceHandle(){
@@ -170,8 +170,8 @@ Page({
       params.sex = info.gender + '';
       params.nickName = info.nickName;
       indexApi.userLogin(params).then(res => {
-        if (res.code == 200) {
           wx.hideLoading()
+        if (res.code == 200) {
           let getData = res.data;
           let userInfo = info;
           userInfo.token = getData.token;
@@ -183,18 +183,26 @@ Page({
             isAuthorize:true
           });
           this.getReservation();
+        }else{
+          app.getLoginCode();
+          wx.showToast({
+            title: '授权登录失败，请重试',
+            icon: 'none',
+            duration: 1000
+          })
         }
       }).catch(reject => {
-        wx.hideLoading()
+        wx.hideLoading();
+        app.getLoginCode();
         wx.showToast({
-          title: reject.message,
+          title: '授权登录失败，请重试',
           icon: 'none',
           duration: 1000
         })
       })
     } else {
       wx.showToast({
-        title: '授权失败',
+        title: '授权失败，请重试',
         icon: 'none',
         duration: 1000
       })

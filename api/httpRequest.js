@@ -11,7 +11,7 @@ const getToken = () => {
  * params:请求的参数
  */
 const sendRequest = (url, method, params) => {
-  let token = getToken();
+  let token =getToken();
   if(params){
     params.token = token;
   }else{

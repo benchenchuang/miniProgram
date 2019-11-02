@@ -32,8 +32,8 @@ Page({
       params.sex = info.gender + '';
       params.nickName = info.nickName;
       indexApi.userLogin(params).then(res => {
+        wx.hideLoading()
         if (res.code == 200) {
-          wx.hideLoading()
           let getData = res.data;
           let userInfo = info;
           userInfo.token = getData.token;
@@ -42,18 +42,26 @@ Page({
           wx.setStorageSync('token', getData.token)
           wx.setStorageSync('userInfo', userInfo);
           this.getReservation();
+        } else {
+          app.getLoginCode();
+          wx.showToast({
+            title: '授权登录失败，请重试',
+            icon: 'none',
+            duration: 1000
+          })
         }
       }).catch(reject => {
-        wx.hideLoading()
+        wx.hideLoading();
+        app.getLoginCode();
         wx.showToast({
-          title: reject.message,
+          title: '授权登录失败，请重试',
           icon: 'none',
           duration: 1000
         })
       })
     } else {
       wx.showToast({
-        title: '授权失败',
+        title: '授权失败，请重试',
         icon: 'none',
         duration: 1000
       })

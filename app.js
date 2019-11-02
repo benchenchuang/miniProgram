@@ -22,6 +22,18 @@ App({
       }
     })
   },
+  getLoginCode(){
+    let that = this;
+    wx.login({
+      success(res) {
+        if (res.code) {
+          that.globalData.code = res.code;
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
+  },
   autoUpdate() {
     var self = this
     // 获取小程序更新机制兼容
